@@ -60,10 +60,11 @@ dbscanWoman = dbscan.fit(data_Woman_pca)
 
 clusters = dbscanWoman.labels_
 
-colors = ['royalblue', 'maroon', 'forestgreen', 'mediumorchid', 'tan', 'deeppink', 'olive', 'goldenrod', 'lightcyan', 'navy']
+colors = ['royalblue', 'maroon', 'forestgreen', 'mediumorchid', 'tan', 'deeppink', 'olive', 'goldenrod', 'lightcyan', 'navy', 'yellow','magneta', 'red', 'blue']
 vectorizer = np.vectorize(lambda x: colors[x % len(colors)])
 
-plt.scatter(dbscanWoman[:,0], dbscanWoman[:,1], c=vectorizer(clusters))
+plt.scatter(data_Woman_pca[:,0], data_Woman_pca[:,1], c=vectorizer(clusters))
+# plt.scatter(data_Woman_pca[:,0], data_Woman_pca[:,1])
 plt.show()
 
 
