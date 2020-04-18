@@ -15,7 +15,7 @@ def getGoalsOfPeople(gender, data):
         dataSubset = dataSubsetGender.loc[dataSubsetGender.goal == ctr].copy()
 
         dataSubset = dataSubset.loc[:,
-                        ['iid', 'attr1_1', 'sinc1_1', 'intel1_1', 'fun1_1', 'amb1_1', 'shar1_1']].copy()
+                        ['attr1_1', 'sinc1_1', 'intel1_1', 'fun1_1', 'amb1_1', 'shar1_1']].copy()
 
         dataSubset = dataSubset.drop_duplicates()
         dataSubsetList.append(dataSubset.dropna())
@@ -37,19 +37,20 @@ def getGoalsOfPeople(gender, data):
     bar1 = graph.bar(3.5, goalDict[4], 0.5, label=labels[3])
     bar1 = graph.bar(4.5, goalDict[5], 0.5, label=labels[4])
     bar1 = graph.bar(5.5, goalDict[6], 0.5, label=labels[5])
-
+    graph.set_xticks(x + 0.5)
+    graph.set_xticklabels(labels)
 
     if gender == 1:
         graph.set_ylabel('Amount of men')
         graph.set_title('Amount of men who claim according goals')
+        plt.savefig("Amount of men who claim according goals.png")
     else:
         graph.set_ylabel('Amount of woman')
         graph.set_title('Amount of woman who claim according goals')
+        plt.savefig("Amount of woman who claim according goals.png")
 
-    graph.set_xticks(x + 0.5)
-    graph.set_xticklabels(labels)
-    plt.show()
 
+    # plt.show()
     return dataSubsetList
 
 
