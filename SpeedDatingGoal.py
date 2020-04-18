@@ -2,34 +2,31 @@ import pandas as pd
 from sklearn.cluster import DBSCAN
 import sklearn
 from sklearn.preprocessing import StandardScaler
-
 from collections import Counter
-
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-
 import numpy as np
 import matplotlib.pyplot as plt
+import Functions
 
+
+
+# Data collection
 data =  pd.read_csv("Speed Dating Data.csv", engine='python')
 
-dataMan = data.loc[data.gender == 0].copy()
-dataWoman = data.loc[data.gender == 1].copy()
+dataSubsetMan = Functions.getGoalsOfPeople(1, data)
+dataSubsetWoman = Functions.getGoalsOfPeople(0, data)
 
-dataSubsetMan = dataMan.loc[dataMan.goal == 4].copy()
-dataSubsetWoman = dataWoman.loc[dataWoman.goal == 4].copy()
-
-dataSubsetMan = dataSubsetMan.loc[:,['samerace','age_o','attr1_1','sinc1_1','intel1_1','fun1_1','amb1_1','shar1_1']].copy()
-dataSubsetWoman = dataSubsetWoman.loc[:,['samerace','age_o','attr1_1','sinc1_1','intel1_1','fun1_1','amb1_1','shar1_1']].copy()
 
 dataSubsetMan.dropna(inplace=True)
 dataSubsetWoman.dropna(inplace=True)
+
 
 # scaler = StandardScaler()
 # dataSubsetScaledWoman = pd.DataFrame(scaler.fit_transform(dataSubsetWoman))
 # dataSubsetScaledMan = pd.DataFrame(scaler.fit_transform(dataSubsetMan))
 
-pca = PCA(n_components=2)
+pca = PCA()
 # data_Man_pca = pca.fit_transform(dataSubsetMan)
 data_Woman_pca = pca.fit_transform(dataSubsetWoman)
 
@@ -60,7 +57,8 @@ dbscanWoman = dbscan.fit(data_Woman_pca)
 
 clusters = dbscanWoman.labels_
 
-colors = ['royalblue', 'maroon', 'forestgreen', 'mediumorchid', 'tan', 'deeppink', 'olive', 'goldenrod', 'lightcyan', 'navy', 'yellow','magneta', 'red', 'blue']
+# colors = ['royalblue', 'maroon', 'forestgreen', 'mediumorchid', 'tan', 'deeppink', 'olive', 'goldenrod', 'lightcyan', 'navy', 'yellow','magneta', 'red', 'blue']
+colors = ['C0','C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11']
 vectorizer = np.vectorize(lambda x: colors[x % len(colors)])
 
 plt.scatter(data_Woman_pca[:,0], data_Woman_pca[:,1], c=vectorizer(clusters))
