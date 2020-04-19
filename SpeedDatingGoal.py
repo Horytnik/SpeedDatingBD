@@ -34,12 +34,14 @@ for genderSel in range(0,2):
         plt.bar(x=range(1, len(per_var) + 1), height=per_var, tick_label=labels)
         plt.ylabel('Percentage of Explained Variance')
         plt.xlabel('Principal Component')
-        plt.title('Scree Plot')
+
         if genderSel == 1:
-            figName = ".\ResultFig\Scree Plot Man goal={}".format(goals)
+            plt.title("Scree Plot Men goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\Scree Plot Men goal={}".format(goals+1)
             plt.savefig(figName)
         else:
-            figName = ".\ResultFig\Scree Plot Woman goal={}".format(goals)
+            plt.title("Scree Plot Women goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\Scree Plot Women goal={}".format(goals+1)
             plt.savefig(figName)
 
 
@@ -54,10 +56,12 @@ for genderSel in range(0,2):
         for sample in pca_df.index:
             plt.annotate(sample, (pca_df.PC1.loc[sample], pca_df.PC2.loc[sample]))
         if genderSel == 1:
-            figName = ".\ResultFig\PCA Man goal={}".format(goals)
+            plt.title("PCA Men goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\PCA Men goal={}".format(goals+1)
             plt.savefig(figName)
         else:
-            figName = ".\ResultFig\PCA Woman goal={}".format(goals)
+            plt.title("PCA Women goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\PCA Women goal={}".format(goals+1)
             plt.savefig(figName)
         dbscanData = Functions.calculateDbscanParm(1,50,2,20,data_Man_pca)
 
@@ -76,10 +80,12 @@ for genderSel in range(0,2):
         plt.scatter(data_Man_pca[:,0], data_Man_pca[:,1], c=vectorizer(clusters))
         plt.title("DBSCAN Clustering")
         if genderSel == 1:
-            figName = ".\ResultFig\DBSCAN Man goal={}".format(goals)
+            plt.title("DBSCAN Men goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\DBSCAN Men goal={}".format(goals+1)
             plt.savefig(figName)
         else:
-            figName = ".\ResultFig\DBSCAN Woman goal={}".format(goals)
+            plt.title("DBSCAN Women goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\DBSCAN Women goal={}".format(goals+1)
             plt.savefig(figName)
         # plt.show()
 
@@ -98,8 +104,10 @@ for genderSel in range(0,2):
                      xytext=(pca.components_[0,i]*4, pca.components_[1,i]*4),
                      arrowprops = {'arrowstyle':'<-'})
         if genderSel == 1:
-            figName = ".\ResultFig\Arrow Man goal={}".format(goals)
+            plt.title("Men requests in women for goal={}".format(Functions.goalDictionary[goals]))
+            figName = ".\ResultFig\Arrow Men goal={}".format(goals+1)
             plt.savefig(figName)
         else:
-            figName = ".\ResultFig\Arrow Woman goal={}".format(goals)
+            plt.title("Women requests in men for goal={}".format(Functions.goalDictionary[goals] ))
+            figName = ".\ResultFig\Arrow Women goal={}".format(goals+1)
             plt.savefig(figName)

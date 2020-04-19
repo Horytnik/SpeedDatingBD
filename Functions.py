@@ -26,7 +26,7 @@ def getGoalsOfPeople(gender, data):
     labels = ['Have fun', 'Meet new people', 'Have a date', 'Serious relationship', 'I did it!', 'Other']
     x = np.arange(len(labels))
 
-    plt.figure()
+    plt.figure(figsize=(15,10))
 
 
     graph = plt.subplot()
@@ -40,14 +40,15 @@ def getGoalsOfPeople(gender, data):
     graph.set_xticks(x + 0.5)
     graph.set_xticklabels(labels)
 
+
     if gender == 1:
         graph.set_ylabel('Amount of men')
         graph.set_title('Amount of men who claim according goals')
-        plt.savefig("Amount of men who claim according goals.png")
+        plt.savefig(".\ResultFig\Amount of men who claim according goals.png")
     else:
-        graph.set_ylabel('Amount of woman')
-        graph.set_title('Amount of woman who claim according goals')
-        plt.savefig("Amount of woman who claim according goals.png")
+        graph.set_ylabel('Amount of women')
+        graph.set_title('Amount of women who claim according goals')
+        plt.savefig(".\ResultFig\Amount of women who claim according goals.png")
 
 
     # plt.show()
@@ -91,3 +92,12 @@ def calculateDbscanParm(minEps,maxEps,minSampl,maxSampl, data):
             indexOfMin = amountWrong.index(min(amountWrong))
 
     return list[indexOfMin]
+
+goalDictionary = {
+    0: "Seemed like a fun night out",
+    1: "To meet new people",
+    2: "To get a date",
+    3: "Looking for a serious relationship=",
+    4: "To say I did it",
+    5: "Other"
+}
